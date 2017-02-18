@@ -4,10 +4,12 @@ import TextField from 'material-ui/TextField';
 class ToDoInput extends React.Component {
   onKeyDown(e) {
     if ((e.keyCode || e.which) != 13) return;
+    if (this.props.todoInput === '') return;
 
     this.props.store.dispatch({
       type: 'ADD_TODO',
-      text: this.props.input
+      text: this.props.todoInput,
+      index: this.props.todoCounter
     });
   }
 
@@ -24,7 +26,7 @@ class ToDoInput extends React.Component {
       onChange={this.onChange.bind(this)}
       ref='toDoInput'
       hintText='Add project'
-      value={this.props.input}
+      value={this.props.todoInput}
     />
   }
 }

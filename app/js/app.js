@@ -5,7 +5,6 @@ import Main from './main.jsx';
 import {white, grey500} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import store from './store';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -19,20 +18,9 @@ const muiTheme = getMuiTheme({
   }
 });
 
-const render = () => {
-  ReactDOM.render(
-    <MuiThemeProvider muiTheme={muiTheme}>
-      <Main
-        todos={store.getState().todos}
-        input={store.getState().input}
-        store={store}
-      />
-    </MuiThemeProvider>,
-    document.getElementById('app')
-  );
-}
-
-store.subscribe(()=>{
-  render();
-})
-render();
+ReactDOM.render(
+  <MuiThemeProvider muiTheme={muiTheme}>
+    <Main/>
+  </MuiThemeProvider>,
+  document.getElementById('app')
+);

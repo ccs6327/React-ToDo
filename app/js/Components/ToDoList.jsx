@@ -6,8 +6,11 @@ const listStyle = {
   margin: 10,
   padding: 10,
   width: 300,
-  display: 'inline-block',
+  maxHeight: '100%',
+  display: 'flex',
+  flexFlow: 'column',
   flex: '1 0',
+  alignSelf: 'flex-start',
   backgroundColor: '#348cc1',
 }
 
@@ -18,12 +21,16 @@ const listTitleStyle = {
   backgroundColor: '#0b3c5d'
 }
 
+const sublistStyle = {
+  overflow: 'auto'
+}
+
 const ToDoList = (props) => (
   <Paper style={listStyle}>
     <div style={listTitleStyle}>{props.title}</div>
-    <div>
+    <div style={sublistStyle}>
       {props.todos.map(t =>
-          <ToDo key={t.text} text={t.text}/>
+          <ToDo key={t.index} text={t.text}/>
       )}
     </div>
   </Paper>

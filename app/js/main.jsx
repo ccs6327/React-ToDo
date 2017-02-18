@@ -2,20 +2,40 @@ import React from 'react';
 import ToDoInput from './Components/ToDoInput';
 import ToDoLists from './Components/ToDoLists';
 import Paper from 'material-ui/Paper';
+import store from './store';
 
-const paperStyle = {
+const mainStyle = {
   padding: 20,
-  width: '100%',
-  height: '100%',
-  display: 'inline-block',
-  backgroundColor: '#1D2731'
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  backgroundColor: '#1D2731',
+  display: 'flex',
+  flexFlow: 'column'
 };
 
 export default class Main extends React.Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => {
+      this.forceUpdate();
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   render() {
-    return <Paper style={paperStyle}>
-      <ToDoInput store={this.props.store} input={this.props.input} />
-      <ToDoLists todos={this.props.todos}/>
-    </Paper>
+    const state = store.getState();
+    return <div style={mainStyle}>
+      <ToDoInput
+        store={store}
+        todoCounter={state.todoCounter}
+        todoInput={state.todoInput}
+      />
+      <ToDoLists todos={state.todos}/>
+    </div>
   }
 }

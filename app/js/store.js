@@ -1,8 +1,9 @@
 import { createStore } from 'redux';
-import addToDo from './Reducer/addToDo';
+import todoApp from './Reducer/todoApp';
 
-const store = createStore(addToDo, {
+const store = createStore(todoApp, {
   todos: [],
-  input: ''
+  todoCounter: 1,
+  todoInput: '',
 });
 export default store;
