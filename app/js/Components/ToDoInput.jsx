@@ -1,8 +1,32 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 
-const ToDoInput = () => (
-  <TextField hintText="Add project"/>
-)
+class ToDoInput extends React.Component {
+  onKeyDown(e) {
+    if ((e.keyCode || e.which) != 13) return;
+
+    this.props.store.dispatch({
+      type: 'ADD_TODO',
+      text: this.props.input
+    });
+  }
+
+  onChange(e) {
+    this.props.store.dispatch({
+      type: 'NEW_TODO_TEXT',
+      text: e.target.value
+    });
+  }
+
+  render() {
+    return <TextField
+      onKeyDown={this.onKeyDown.bind(this)}
+      onChange={this.onChange.bind(this)}
+      ref='toDoInput'
+      hintText='Add project'
+      value={this.props.input}
+    />
+  }
+}
 
 export default ToDoInput;
