@@ -3,3 +3,10 @@ export const TODO_STATUS = {
   IN_PROGRESS: 1,
   DONE: 2
 }
+
+export const INITIAL_STATE = {
+  todos: [],
+  todoCounter: 0,
+  todoInput: '',
+  isDragging: undefined
+}

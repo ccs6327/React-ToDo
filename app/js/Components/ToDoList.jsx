@@ -10,7 +10,6 @@ const listStyle = {
   display: 'flex',
   flexFlow: 'column',
   flex: '1 0 250px',
-  alignSelf: 'flex-start',
   backgroundColor: '#348cc1',
 }
 
@@ -18,13 +17,13 @@ const listHeaderStyle = {
   padding: 10,
   color: 'white',
   backgroundColor: '#0b3c5d',
-  flex: '0 0 62px',
+  flex: '0 0 42px',
   display: 'flex',
 }
 
 const listTitleStyle = {
   fontSize: 20,
-  lineHeight: '56px',
+  lineHeight: '42px',
 }
 
 const sublistStyle = {

@@ -5,9 +5,9 @@ import { TODO_STATUS } from '../Constants'
 const toDoListContainerStyle = {
   display: 'flex',
   flexFlow: 'row',
-  height: '100%',
   flex: '1 0',
-  overflowX: 'auto'
+  overflowX: 'auto',
+  alignItems: 'baseline',
 }
 
 const ToDoLists = (props) => (

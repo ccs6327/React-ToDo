@@ -4,6 +4,9 @@ import ToDoLists from './ToDoLists';
 import ProjectCountBadge from './ProjectCountBadge';
 import store from '../store';
 import { Provider } from 'react-redux';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import { red800 } from 'material-ui/styles/colors';
 
 const mainStyle = {
   padding: 20,
@@ -26,6 +29,18 @@ const headerStyle = {
 const totalLabelStyle = {
   color: '#d9b310',
   textAlign: 'center'
+}
+
+const deleteButtonStyle = {
+  width: 60,
+  height: 60,
+  padding: 10
+}
+
+const deleteIconStyle = {
+  width: 40,
+  height: 40,
+  color: red800
 }
 
 export default class Main extends React.Component {
@@ -51,6 +66,12 @@ export default class Main extends React.Component {
     });
   }
 
+  onDeleteButtonClick() {
+    store.dispatch({
+      type: 'RESET_DATA'
+    });
+  }
+
   render() {
     const state = store.getState();
 
@@ -65,6 +86,9 @@ export default class Main extends React.Component {
             todoInput={state.todoInput}
           />
           <div style={{flex:'1 1'}}></div>
+          <IconButton style={deleteButtonStyle} iconStyle={deleteIconStyle}>
+            <DeleteIcon onTouchTap={this.onDeleteButtonClick.bind(this)}/>
+          </IconButton>
           <div>
             <div style={totalLabelStyle}>TOTAL</div>
             <ProjectCountBadge count={state.todos.length}/>

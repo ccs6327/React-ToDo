@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './Components/main.jsx';
-
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import {white, grey500} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -20,6 +20,7 @@ const muiTheme = getMuiTheme({
 });
 
 
+injectTapEventPlugin();
 ReactDOM.render(
   <MuiThemeProvider muiTheme={muiTheme}>
     <Main/>
