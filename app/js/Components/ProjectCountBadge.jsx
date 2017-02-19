@@ -1,12 +1,12 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
+// import Paper from 'material-ui/Paper';
 
 const badgeStyle = {
   backgroundColor: 'rgba(0,0,0,0)',
-  padding: 10,
   color: '#d9b310',
   width: 80,
-  textAlign: 'center'
+  textAlign: 'center',
+  boxShadow: 'none'
 }
 
 const countStyle = {
@@ -19,10 +19,10 @@ const labelStyle = {
 }
 
 const ProjectCountBadge = (props) => (
-  <Paper style={badgeStyle}>
+  <div style={badgeStyle}>
     <div style={countStyle}>{props.count}</div>
     <div style={labelStyle}>PROJECTS</div>
-  </Paper>
+  </div>
 )
 
 export default ProjectCountBadge;

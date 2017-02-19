@@ -15,7 +15,8 @@ const muiTheme = getMuiTheme({
   textField: {
     textColor: white,
     hintColor: grey500
-  }
+  },
+  fontFamily: 'Open Sans, sans-serif'
 });
 
 

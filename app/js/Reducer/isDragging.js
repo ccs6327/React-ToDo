@@ -4,8 +4,7 @@ const isDragging = (isDragging, action) => {
       return {
         id: action.id,
       }
-    case 'DRAG_END_TODO':
-    case 'MOUSE_UP_TODO_LIST':
+    case 'MOUSE_UP':
       return undefined;
     default:
       return isDragging

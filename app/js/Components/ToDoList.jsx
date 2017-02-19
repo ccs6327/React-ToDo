@@ -4,13 +4,12 @@ import ToDo from './ToDo';
 import ProjectCountBadge from './ProjectCountBadge';
 
 const listStyle = {
-  margin: 10,
+  margin: '0px 10px',
   padding: 10,
-  width: 300,
   maxHeight: '100%',
   display: 'flex',
   flexFlow: 'column',
-  flex: '1 0',
+  flex: '1 0 250px',
   alignSelf: 'flex-start',
   backgroundColor: '#348cc1',
 }
@@ -19,7 +18,7 @@ const listHeaderStyle = {
   padding: 10,
   color: 'white',
   backgroundColor: '#0b3c5d',
-  flex: '0 0 56px',
+  flex: '0 0 62px',
   display: 'flex',
 }
 
@@ -53,16 +52,9 @@ class ToDoList extends React.Component {
     });
   }
 
-  onMouseUp(e) {
-    this.context.store.dispatch({
-      type: 'MOUSE_UP_TODO_LIST'
-    });
-  }
-
   render() {
     return <Paper style={listStyle}
-      onDragOver={this.onDragOver.bind(this)}
-      onMouseUp={this.onMouseUp.bind(this)}>
+      onDragOver={this.onDragOver.bind(this)}>
       <div style={listHeaderStyle} className='noselect'>
         <div style={listTitleStyle}>{this.props.title}</div>
         <div style={{flex:'1 1'}}/>

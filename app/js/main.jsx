@@ -19,7 +19,13 @@ const mainStyle = {
 
 const headerStyle = {
   display: 'flex',
-  flexFlow: 'row'
+  flexFlow: 'row',
+  padding: 10
+}
+
+const totalLabelStyle = {
+  color: '#d9b310',
+  textAlign: 'center'
 }
 
 export default class Main extends React.Component {
@@ -33,11 +39,18 @@ export default class Main extends React.Component {
     this.unsubscribe();
   }
 
+  onMouseUp(e) {
+    store.dispatch({
+      type: 'MOUSE_UP'
+    });
+  }
+
   render() {
     const state = store.getState();
 
     return <Provider store={store}>
-      <div style={mainStyle}>
+      <div style={mainStyle}
+        onMouseUp={this.onMouseUp.bind(this)}>
         <div style={headerStyle}>
           <ToDoInput
             store={store}
@@ -45,7 +58,10 @@ export default class Main extends React.Component {
             todoInput={state.todoInput}
           />
           <div style={{flex:'1 1'}}></div>
-          <ProjectCountBadge count={state.todos.length}/>
+          <div>
+            <div style={totalLabelStyle}>TOTAL</div>
+            <ProjectCountBadge count={state.todos.length}/>
+          </div>
         </div>
         <ToDoLists store={store} todos={state.todos} isDragging={state.isDragging}/>
       </div>
