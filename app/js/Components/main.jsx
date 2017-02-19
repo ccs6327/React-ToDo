@@ -1,8 +1,8 @@
 import React from 'react';
-import ToDoInput from './Components/ToDoInput';
-import ToDoLists from './Components/ToDoLists';
-import ProjectCountBadge from './Components/ProjectCountBadge';
-import store from './store';
+import ToDoInput from './ToDoInput';
+import ToDoLists from './ToDoLists';
+import ProjectCountBadge from './ProjectCountBadge';
+import store from '../store';
 import { Provider } from 'react-redux';
 
 const mainStyle = {
@@ -39,9 +39,9 @@ export default class Main extends React.Component {
     this.unsubscribe();
   }
 
-  onMouseUp(e) {
+  onDrop(e) {
     store.dispatch({
-      type: 'MOUSE_UP'
+      type: 'DROP_TODO'
     });
   }
 
@@ -50,7 +50,7 @@ export default class Main extends React.Component {
 
     return <Provider store={store}>
       <div style={mainStyle}
-        onMouseUp={this.onMouseUp.bind(this)}>
+        onDrop={this.onDrop.bind(this)}>
         <div style={headerStyle}>
           <ToDoInput
             store={store}

@@ -15,6 +15,7 @@ const draggingStyle = (pos,  size) => {
 
 class ToDo extends React.Component {
   onDragStart(e) {
+    e.dataTransfer.setData('text', this.props.todoId)
     const todo = this.refs.todo;
     const paddingLeft = parseFloat(todo.style.paddingLeft);
     const paddingRight = parseFloat(todo.style.paddingRight);
@@ -22,9 +23,15 @@ class ToDo extends React.Component {
     this.context.store.dispatch({
       type: 'DRAG_START_TODO',
       id: this.props.todoId,
-      pos: [e.pageX, e.pageY],
-      size: [todo.offsetWidth, todo.offsetHeight],
     });
+  }
+
+  onDragEnd(e) {
+    e.preventDefault();
+    this.context.store.dispatch({
+      type: 'DRAG_END_TODO'
+    });
+    this.refs.todo.style.width = null;
   }
 
   isDraggingCurrentTodo() {
@@ -35,10 +42,11 @@ class ToDo extends React.Component {
   render() {
     const { store } = this.context
     return <div ref='todo'
-      className='noselect'
+      className='ToDo noselect'
       style={!this.isDraggingCurrentTodo() ? toDoStyle :
         draggingStyle(this.props.isDragging.pos, this.props.isDragging.size)}
       onDragStart={this.onDragStart.bind(this)}
+      onDragEnd={this.onDragEnd.bind(this)}
       draggable={true}
       value={this.props.todoId}>
       {this.props.text}

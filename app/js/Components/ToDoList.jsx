@@ -6,7 +6,7 @@ import ProjectCountBadge from './ProjectCountBadge';
 const listStyle = {
   margin: '0px 10px',
   padding: 10,
-  maxHeight: '100%',
+  maxHeight: '95%',
   display: 'flex',
   flexFlow: 'column',
   flex: '1 0 250px',
@@ -33,6 +33,7 @@ const sublistStyle = {
 
 class ToDoList extends React.Component {
   onDragOver(e) {
+    e.preventDefault();
     const children = this.refs.todoSublist.children;
     let afterId = -1;
     for (var i = children.length - 1; i >= 0 ; i--) {
@@ -51,6 +52,8 @@ class ToDoList extends React.Component {
       status: this.props.status
     });
   }
+
+
 
   render() {
     return <Paper style={listStyle}
