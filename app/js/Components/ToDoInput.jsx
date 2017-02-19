@@ -9,7 +9,7 @@ class ToDoInput extends React.Component {
     this.props.store.dispatch({
       type: 'ADD_TODO',
       text: this.props.todoInput,
-      index: this.props.todoCounter
+      id: this.props.todoCounter
     });
   }
 

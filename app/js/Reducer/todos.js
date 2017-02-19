@@ -8,25 +8,35 @@ const todos = (todos, action) => {
             {
               text: action.text,
               status: TODO_STATUS.NEW,
-              index: action.index,
+              id: action.id,
               isDragging: false
             }
           ]
-    case 'CHANGE_TODO_STATUS':
-      switch(action.status) {
-        case TODO_STATUS.NEW:
-        case TODO_STATUS.IN_PROGRESS:
-        case TODO_STATUS.DONE:
-          return [
-              ...todos.slice(0, action.index),
-              Object.assign({}, todos[action.index], {
-                status: action.status
-              }),
-              ...todos.slice(action.index + 1)
-            ]
-        default:
-          return todos;
-      }
+    case 'DRAG_OVER_TODO':
+      if (action.srcId === action.afterId) return todos;
+
+      let indexSrc = 0;
+      let indexTrgt = -1;
+      todos.forEach((t, idx)=> {
+        if (t.id === action.srcId) indexSrc = idx;
+        else if (t.id === action.afterId) indexTrgt = idx;
+      });
+
+      return indexSrc < indexTrgt ? [
+          ...todos.slice(0, indexSrc),
+          ...todos.slice(indexSrc + 1, indexTrgt + 1),
+          Object.assign({}, todos[indexSrc], {
+            status: action.status
+          }),
+          ...todos.slice(indexTrgt + 1)
+        ] : [
+          ...todos.slice(0, indexTrgt + 1),
+          Object.assign({}, todos[indexSrc], {
+            status: action.status
+          }),
+          ...todos.slice(indexTrgt + 1, indexSrc),
+          ...todos.slice(indexSrc + 1)
+        ];
     default:
       return todos;
   }

@@ -1,18 +1,12 @@
 const isDragging = (isDragging, action) => {
   switch(action.type) {
-    case 'MOUSE_DOWN_TODO':
+    case 'DRAG_START_TODO':
       return {
-        index: action.index,
-        pos: action.pos,
-        size: action.size,
+        id: action.id,
       }
-    case 'MOUSE_UP_TODO':
+    case 'DRAG_END_TODO':
+    case 'MOUSE_UP_TODO_LIST':
       return undefined;
-    case 'MOUSE_MOVE':
-      return isDragging ?
-        Object.assign({}, isDragging, {
-          pos: action.pos
-        }) : null
     default:
       return isDragging
   }

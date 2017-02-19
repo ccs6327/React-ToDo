@@ -25,16 +25,49 @@ const sublistStyle = {
   overflow: 'auto'
 }
 
-const ToDoList = (props) => (
-  <Paper style={listStyle}>
-    <div style={listTitleStyle} className='noselect'>{props.title}</div>
-    <div style={sublistStyle}>
-      {props.todos.map(t =>
-          <ToDo key={t.index} text={t.text} index={t.index}
-            isDragging={props.isDragging}/>
-      )}
-    </div>
-  </Paper>
-)
+class ToDoList extends React.Component {
+  onDragOver(e) {
+    const children = this.refs.todoSublist.children;
+    let afterId = -1;
+    for (var i = children.length - 1; i >= 0 ; i--) {
+      const rect = children[i].getBoundingClientRect();
+
+      if (e.pageY > rect.top) {
+        afterId = +children[i].getAttribute('value');
+        break;
+      }
+    }
+
+    this.context.store.dispatch({
+      type: 'DRAG_OVER_TODO',
+      srcId: this.props.isDragging.id,
+      afterId: afterId,
+      status: this.props.status
+    });
+  }
+
+  onMouseUp(e) {
+    this.context.store.dispatch({
+      type: 'MOUSE_UP_TODO_LIST'
+    });
+  }
+
+  render() {
+    return <Paper style={listStyle}
+      onDragOver={this.onDragOver.bind(this)}
+      onMouseUp={this.onMouseUp.bind(this)}>
+      <div style={listTitleStyle} className='noselect'>{this.props.title}</div>
+      <div style={sublistStyle} ref='todoSublist'>
+        {this.props.todos.map(t =>
+            <ToDo key={t.id} text={t.text} todoId={t.id}
+              isDragging={this.props.isDragging}/>
+        )}
+      </div>
+    </Paper>
+  }
+}
+ToDoList.contextTypes = {
+  store: React.PropTypes.object
+}
 
 export default ToDoList;
