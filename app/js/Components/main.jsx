@@ -45,12 +45,19 @@ export default class Main extends React.Component {
     });
   }
 
+  onMouseUp(e) {
+    store.dispatch({
+      type: 'MOUSE_UP'
+    });
+  }
+
   render() {
     const state = store.getState();
 
     return <Provider store={store}>
       <div style={mainStyle}
-        onDrop={this.onDrop.bind(this)}>
+        onDrop={this.onDrop.bind(this)}
+        onMouseUp={this.onMouseUp.bind(this)}>
         <div style={headerStyle}>
           <ToDoInput
             store={store}

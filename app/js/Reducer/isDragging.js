@@ -6,6 +6,7 @@ const isDragging = (isDragging, action) => {
       }
     case 'DROP_TODO':
     case 'DRAG_END_TODO':
+    case 'MOUSE_UP':
       return undefined;
     default:
       return isDragging

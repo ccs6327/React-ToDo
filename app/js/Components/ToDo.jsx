@@ -26,14 +26,6 @@ class ToDo extends React.Component {
     });
   }
 
-  onDragEnd(e) {
-    e.preventDefault();
-    this.context.store.dispatch({
-      type: 'DRAG_END_TODO'
-    });
-    this.refs.todo.style.width = null;
-  }
-
   isDraggingCurrentTodo() {
     return this.props.isDragging !== undefined &&
       this.props.isDragging.id == this.props.todoId;
@@ -46,7 +38,6 @@ class ToDo extends React.Component {
       style={!this.isDraggingCurrentTodo() ? toDoStyle :
         draggingStyle(this.props.isDragging.pos, this.props.isDragging.size)}
       onDragStart={this.onDragStart.bind(this)}
-      onDragEnd={this.onDragEnd.bind(this)}
       draggable={true}
       value={this.props.todoId}>
       {this.props.text}
