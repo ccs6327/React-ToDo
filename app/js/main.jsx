@@ -1,6 +1,7 @@
 import React from 'react';
 import ToDoInput from './Components/ToDoInput';
 import ToDoLists from './Components/ToDoLists';
+import ProjectCountBadge from './Components/ProjectCountBadge';
 import store from './store';
 import { Provider } from 'react-redux';
 
@@ -15,6 +16,11 @@ const mainStyle = {
   display: 'flex',
   flexFlow: 'column'
 };
+
+const headerStyle = {
+  display: 'flex',
+  flexFlow: 'row'
+}
 
 export default class Main extends React.Component {
   componentDidMount() {
@@ -32,11 +38,15 @@ export default class Main extends React.Component {
 
     return <Provider store={store}>
       <div style={mainStyle}>
-        <ToDoInput
-          store={store}
-          todoCounter={state.todoCounter}
-          todoInput={state.todoInput}
-        />
+        <div style={headerStyle}>
+          <ToDoInput
+            store={store}
+            todoCounter={state.todoCounter}
+            todoInput={state.todoInput}
+          />
+          <div style={{flex:'1 1'}}></div>
+          <ProjectCountBadge count={state.todos.length}/>
+        </div>
         <ToDoLists store={store} todos={state.todos} isDragging={state.isDragging}/>
       </div>
     </Provider>

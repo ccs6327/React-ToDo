@@ -1,6 +1,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import ToDo from './ToDo';
+import ProjectCountBadge from './ProjectCountBadge';
 
 const listStyle = {
   margin: 10,
@@ -14,11 +15,17 @@ const listStyle = {
   backgroundColor: '#348cc1',
 }
 
-const listTitleStyle = {
+const listHeaderStyle = {
   padding: 10,
-  fontSize: 20,
   color: 'white',
-  backgroundColor: '#0b3c5d'
+  backgroundColor: '#0b3c5d',
+  flex: '0 0 56px',
+  display: 'flex',
+}
+
+const listTitleStyle = {
+  fontSize: 20,
+  lineHeight: '56px',
 }
 
 const sublistStyle = {
@@ -56,7 +63,11 @@ class ToDoList extends React.Component {
     return <Paper style={listStyle}
       onDragOver={this.onDragOver.bind(this)}
       onMouseUp={this.onMouseUp.bind(this)}>
-      <div style={listTitleStyle} className='noselect'>{this.props.title}</div>
+      <div style={listHeaderStyle} className='noselect'>
+        <div style={listTitleStyle}>{this.props.title}</div>
+        <div style={{flex:'1 1'}}/>
+        <ProjectCountBadge count={this.props.todos.length}/>
+      </div>
       <div style={sublistStyle} ref='todoSublist'>
         {this.props.todos.map(t =>
             <ToDo key={t.id} text={t.text} todoId={t.id}

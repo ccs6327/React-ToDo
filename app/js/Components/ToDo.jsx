@@ -15,8 +15,6 @@ const draggingStyle = (pos,  size) => {
 
 class ToDo extends React.Component {
   onDragStart(e) {
-    e.dataTransfer.setData('text','');
-
     const todo = this.refs.todo;
     const paddingLeft = parseFloat(todo.style.paddingLeft);
     const paddingRight = parseFloat(todo.style.paddingRight);
