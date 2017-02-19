@@ -1,6 +1,6 @@
 import { TODO_STATUS } from '../Constants';
 
-const todos = (todos, action) => {
+const todos = (todos = [], action) => {
   switch(action.type) {
     case 'ADD_TODO':
       return [

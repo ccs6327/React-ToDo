@@ -1,4 +1,4 @@
-const isDragging = (isDragging, action) => {
+const isDragging = (isDragging = false, action) => {
   switch(action.type) {
     case 'DRAG_START_TODO':
       return {
@@ -7,7 +7,7 @@ const isDragging = (isDragging, action) => {
     case 'DROP_TODO':
     case 'DRAG_END_TODO':
     case 'MOUSE_UP':
-      return undefined;
+      return false;
     default:
       return isDragging
   }

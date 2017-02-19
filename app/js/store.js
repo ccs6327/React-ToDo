@@ -1,8 +1,9 @@
 import { createStore } from 'redux';
-import todoApp from './Reducer/todoApp';
+import rootReducer from './Reducer/rootReducer';
 import { saveState, loadState } from './LocalStorageHelper'
 
-const store = createStore(todoApp, loadState());
+console.log(rootReducer)
+const store = createStore(rootReducer, loadState());
 store.subscribe(()=>{
   saveState(store.getState());
 })
