@@ -1,8 +1,8 @@
 import React from 'react';
 import ToDoInput from './Components/ToDoInput';
 import ToDoLists from './Components/ToDoLists';
-import Paper from 'material-ui/Paper';
 import store from './store';
+import { Provider } from 'react-redux';
 
 const mainStyle = {
   padding: 20,
@@ -29,13 +29,16 @@ export default class Main extends React.Component {
 
   render() {
     const state = store.getState();
-    return <div style={mainStyle}>
-      <ToDoInput
-        store={store}
-        todoCounter={state.todoCounter}
-        todoInput={state.todoInput}
-      />
-      <ToDoLists todos={state.todos}/>
-    </div>
+
+    return <Provider store={store}>
+      <div style={mainStyle}>
+        <ToDoInput
+          store={store}
+          todoCounter={state.todoCounter}
+          todoInput={state.todoInput}
+        />
+        <ToDoLists store={store} todos={state.todos} isDragging={state.isDragging}/>
+      </div>
+    </Provider>
   }
 }

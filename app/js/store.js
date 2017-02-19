@@ -3,7 +3,8 @@ import todoApp from './Reducer/todoApp';
 
 const store = createStore(todoApp, {
   todos: [],
-  todoCounter: 1,
+  todoCounter: 0,
   todoInput: '',
+  isDragging: undefined
 });
 export default store;

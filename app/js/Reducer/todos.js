@@ -8,7 +8,8 @@ const todos = (todos, action) => {
             {
               text: action.text,
               status: TODO_STATUS.NEW,
-              index: action.index
+              index: action.index,
+              isDragging: false
             }
           ]
     case 'CHANGE_TODO_STATUS':

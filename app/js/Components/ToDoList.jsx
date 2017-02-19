@@ -27,10 +27,11 @@ const sublistStyle = {
 
 const ToDoList = (props) => (
   <Paper style={listStyle}>
-    <div style={listTitleStyle}>{props.title}</div>
+    <div style={listTitleStyle} className='noselect'>{props.title}</div>
     <div style={sublistStyle}>
       {props.todos.map(t =>
-          <ToDo key={t.index} text={t.text}/>
+          <ToDo key={t.index} text={t.text} index={t.index}
+            isDragging={props.isDragging}/>
       )}
     </div>
   </Paper>
