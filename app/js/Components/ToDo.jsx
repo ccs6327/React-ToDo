@@ -15,10 +15,6 @@ const draggingStyle = (pos,  size) => {
 
 class ToDo extends React.Component {
   onDragStart(e) {
-    const todo = this.refs.todo;
-    const paddingLeft = parseFloat(todo.style.paddingLeft);
-    const paddingRight = parseFloat(todo.style.paddingRight);
-    todo.style.width = (todo.offsetWidth - paddingLeft - paddingRight) + 'px';
     this.context.store.dispatch({
       type: 'DRAG_START_TODO',
       id: this.props.todoId,

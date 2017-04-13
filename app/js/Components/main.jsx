@@ -94,7 +94,7 @@ export default class Main extends React.Component {
             <ProjectCountBadge count={state.todos.length}/>
           </div>
         </div>
-        <ToDoLists store={store} todos={state.todos} isDragging={state.isDragging}/>
+        <ToDoLists todos={state.todos} isDragging={state.isDragging}/>
       </div>
     </Provider>
   }
